@@ -3,11 +3,11 @@ package com.example.BANK_OF_GENNADZIY.controller;
 import com.example.BANK_OF_GENNADZIY.model.Test;
 import com.example.BANK_OF_GENNADZIY.service.TestSevice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,5 +21,11 @@ public class MainController {
         return ResponseEntity.ok().body(testSevice.getAllTest());
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Test> add(@RequestBody Test test) {
+        List<Test> list = new ArrayList<>();
+        return ResponseEntity.ok().body(this.testSevice.createTest(test));
+    }
 }
 

@@ -25,4 +25,9 @@ public class TestServImpl implements TestSevice {
         }
         return test;
     }
+
+    @Override
+    public Test createTest(Test test) {
+        return testRepo.save(test);
+    }
 }
