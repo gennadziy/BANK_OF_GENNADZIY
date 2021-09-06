@@ -27,5 +27,11 @@ public class MainController {
         List<Test> list = new ArrayList<>();
         return ResponseEntity.ok().body(this.testSevice.createTest(test));
     }
+
+    @GetMapping("/api/{id}")
+    public ResponseEntity<Test> ane(@PathVariable("id") Long id) throws Exception {
+        Test tEst = testSevice.getId(id).orElseThrow(() -> new Exception("NOT FOUND ID"));
+        return ResponseEntity.ok().body(tEst);
+    }
 }
 
