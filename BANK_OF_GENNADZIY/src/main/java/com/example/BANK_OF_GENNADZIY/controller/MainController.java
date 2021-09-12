@@ -1,5 +1,6 @@
 package com.example.BANK_OF_GENNADZIY.controller;
 
+import com.example.BANK_OF_GENNADZIY.exception.ResourceNotFoundException;
 import com.example.BANK_OF_GENNADZIY.model.Test;
 import com.example.BANK_OF_GENNADZIY.service.TestSevice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,11 @@ public class MainController {
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id) {
-        Test test = testSevice.delete(id);
+    public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id)
+            throws ResourceNotFoundException, ReflectiveOperationException {
+        Test test = testSevice.getId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Test not found for this id :: " + id));
+        testSevice.delete(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
