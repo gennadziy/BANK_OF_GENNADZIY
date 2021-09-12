@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -33,5 +35,13 @@ public class MainController {
         Test tEst = testSevice.getId(id).orElseThrow(() -> new Exception("NOT FOUND ID"));
         return ResponseEntity.ok().body(tEst);
     }
-}
 
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id) {
+        Test test = testSevice.delete(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
+}

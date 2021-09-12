@@ -9,4 +9,5 @@ public interface TestSevice {
     List<Test> getAllTest();
     Optional <Test> getId(Long id) throws ReflectiveOperationException;
     Test createTest(Test test);
+    Test delete(Long id);
 }

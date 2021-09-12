@@ -30,4 +30,10 @@ public class TestServImpl implements TestSevice {
     public Test createTest(Test test) {
         return testRepo.save(test);
     }
+
+    @Override
+    public Test delete(Long id) {
+        testRepo.deleteById(id);
+        return null;
+    }
 }
