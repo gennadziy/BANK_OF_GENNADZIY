@@ -29,7 +29,7 @@ public class MainController {
     @GetMapping
 //    @Cacheable("test")
     public ResponseEntity<List<Test>> getAll(Long id) throws InterruptedException {
-        Thread.sleep(1000);
+//        Thread.sleep(3000);
         return ResponseEntity.ok().body(testSevice.getAllTest());
     }
 
