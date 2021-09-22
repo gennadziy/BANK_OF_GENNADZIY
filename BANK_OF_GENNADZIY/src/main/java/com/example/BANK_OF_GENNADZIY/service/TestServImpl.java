@@ -3,6 +3,7 @@ package com.example.BANK_OF_GENNADZIY.service;
 import com.example.BANK_OF_GENNADZIY.dao.TestRepo;
 import com.example.BANK_OF_GENNADZIY.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,9 @@ public class TestServImpl implements TestSevice {
     private TestRepo testRepo;
 
     @Override
-    public List<Test> getAllTest() {
+    @Cacheable("test")
+    public List<Test> getAllTest() throws InterruptedException {
+        Thread.sleep ( 5000 );
         return testRepo.findAll();
     }
 
