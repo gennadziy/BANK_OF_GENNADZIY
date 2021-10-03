@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -29,6 +29,7 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
+	@CrossOrigin
 
 	@PostMapping(value = "/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -42,7 +43,8 @@ public class JwtAuthenticationController {
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
-	
+	@CrossOrigin
+
 	@PostMapping(value = "/register")
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));

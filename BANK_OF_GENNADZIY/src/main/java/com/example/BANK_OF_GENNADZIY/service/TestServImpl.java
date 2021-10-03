@@ -16,10 +16,10 @@ public class TestServImpl implements TestSevice {
     private TestRepo testRepo;
 
     @Override
-    @Cacheable("test")
+//    @Cacheable("test")
 //    @CacheEvict(value="test", allEntries=true)
     public List<Test> getAllTest() throws InterruptedException {
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
         return testRepo.findAll();
     }
 

@@ -5,10 +5,9 @@ import com.example.BANK_OF_GENNADZIY.dao.UserDao;
 import com.example.BANK_OF_GENNADZIY.exception.ResourceNotFoundException;
 import com.example.BANK_OF_GENNADZIY.model.Test;
 import com.example.BANK_OF_GENNADZIY.model.User;
-import com.example.BANK_OF_GENNADZIY.model.UserDTO;
 import com.example.BANK_OF_GENNADZIY.service.TestSevice;
+import com.example.BANK_OF_GENNADZIY.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,8 @@ public class MainController {
     private TestRepo testRepo;
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
+    @CrossOrigin
 
     @GetMapping
 //    @Cacheable("test")
@@ -36,11 +36,14 @@ public class MainController {
 //        Thread.sleep(3000);
         return ResponseEntity.ok().body(testSevice.getAllTest());
     }
+    @CrossOrigin
+
     @GetMapping("/sort")
 //    @Cacheable("test")
     public ResponseEntity<List<Test>> getAllTestSort() {
         return ResponseEntity.ok().body(testRepo.findAllTest(JpaSort.unsafe("LENGTH(name)")));
     }
+    @CrossOrigin
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,22 +51,30 @@ public class MainController {
         List<Test> list = new ArrayList<>();
         return ResponseEntity.ok().body(this.testSevice.createTest(test));
     }
+    @CrossOrigin
 
     @GetMapping("/api/{id}")
     public ResponseEntity<Test> ane(@PathVariable("id") Long id) throws Exception {
-        Test tEst = testSevice.getId(id).orElseThrow(() -> new Exception("NOT FOUND ID"));
+        Test tEst = testSevice.getId(id).orElseThrow(() -> new Exception("NOT FOUND ID TEST"));
         return ResponseEntity.ok().body(tEst);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Map<String, Boolean> deletePlanet(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException, ReflectiveOperationException {
         Test test = testSevice.getId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Test not found for this id :: " + id));
         testSevice.delete(id);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
+        response.put("deleted", Boolean.FALSE);
         return response;
+    }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> oneUser(@PathVariable("id") Long id) throws Exception {
+        User user = userService.getId(id).orElseThrow(() -> new Exception("NOT FOUND ID TEST"));
+        return ResponseEntity.ok().body(user);
     }
 
 

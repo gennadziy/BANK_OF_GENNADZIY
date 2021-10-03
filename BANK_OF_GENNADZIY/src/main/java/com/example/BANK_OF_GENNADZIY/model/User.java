@@ -18,6 +18,13 @@ public class User {
     @Column
     @JsonIgnore
     private String password;
-
+    @Column
+    private String email;
+    @Column
+    @JsonIgnore
+    private boolean enabled;
+    @Column
+    @JsonIgnore
+    private boolean tokenExpired;
 
 }
