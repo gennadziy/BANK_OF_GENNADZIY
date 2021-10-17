@@ -8,8 +8,9 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class BankOfGennadziyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BankOfGennadziyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BankOfGennadziyApplication.class, args);
+
+    }
 
 }
