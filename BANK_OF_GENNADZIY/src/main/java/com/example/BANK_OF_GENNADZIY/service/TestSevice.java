@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TestSevice {
-    List<Test> getAllTest() throws InterruptedException;
+    List<Test> getAllTest();
     Optional <Test> getId(Long id) throws ReflectiveOperationException;
     Test createTest(Test test);
-    Test delete(Long id);
+    Test  delete(long id);
 }
