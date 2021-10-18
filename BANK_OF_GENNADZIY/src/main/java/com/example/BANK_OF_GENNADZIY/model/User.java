@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user1")
 @Data
 public class User {
 
